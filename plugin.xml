@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-ionic4-crosswalk-webview" version="4.1.8">
+  <name>cordova-plugin-ionic4-crosswalk-webview</name>
+  <description>Ionic Crosswalk Web View Engine Plugin</description>
+  <license>Apache-2.0</license>
+  <keywords>cordova,wkwebview</keywords>
+  <repo>https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview</repo>
+  <engines>
+    <engine name="cordova" version=">=7.1.0"/>
+        <engine name="cordova-ios" version=">=4.0.0-dev"/>
+        <engine name="apple-ios" version=">=11.0"/>
+    <engine name="cordova-android" version=">=6.4.0"/>
+    <engine name="cordova-plugman" version=">=5.2.0"/><!-- needed for gradleReference support -->
+  </engines>
+  <preference name="WEBVIEW_ENGINE"/>
+  <js-module src="src/www/util.js" name="IonicWebView">
+    <clobbers target="Ionic.WebView"/>
+  </js-module>
+  <platform name="android">
+    <config-file target="config.xml" parent="/*">
+      <allow-navigation href="http://localhost/*"/>
+      <allow-navigation href="https://localhost/*"/>
+      <allow-navigation href="ionic://*"/><!-- <preference name="webView" value="org.crosswalk.engine.XWalkWebViewEngine"/> -->
+      <preference name="xwalkVersion" value="$XWALK_VERSION"/>
+      <preference name="xwalkLiteVersion" value="$XWALK_LITEVERSION"/>
+      <preference name="xwalkCommandLine" value="$XWALK_COMMANDLINE"/>
+      <preference name="xwalkMode" value="$XWALK_MODE"/>
+      <preference name="xwalkMultipleApk" value="$XWALK_MULTIPLEAPK"/>
+      <preference name="android-minSdkVersion" value="19"/>
+      <preference name="webView" value="com.lifang123.cordova.webview.IonicCrosswalkWebViewEngine"/>
+      <feature name="IonicWebView">
+        <param name="android-package" value="com.lifang123.cordova.webview.IonicCrosswalkWebView"/>
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
+      <meta-data android:name="WEBVIEW_ENGINE" android:value="$WEBVIEW_ENGINE"/>
+    </config-file>
+    <source-file src="src/android/com/ionicframework/cordova/webview/IonicWebViewEngine.java" target-dir="src/com/ionicframework/cordova/webview"/>
+    <source-file src="src/android/com/ionicframework/cordova/webview/IonicWebView.java" target-dir="src/com/ionicframework/cordova/webview"/>
+    <source-file src="src/android/com/ionicframework/cordova/webview/AndroidProtocolHandler.java" target-dir="src/com/ionicframework/cordova/webview"/>
+    <source-file src="src/android/com/ionicframework/cordova/webview/UriMatcher.java" target-dir="src/com/ionicframework/cordova/webview"/>
+    <source-file src="src/android/com/ionicframework/cordova/webview/WebViewLocalServer.java" target-dir="src/com/ionicframework/cordova/webview"/>
+    <preference name="ANDROID_SUPPORT_ANNOTATIONS_VERSION" default="27.+"/>
+    <framework src="com.android.support:support-annotations:$ANDROID_SUPPORT_ANNOTATIONS_VERSION"/>
+    <source-file src="src/android/com/lifang123/cordova/webview/IonicCrosswalkWebViewEngine.java" target-dir="src/com/lifang123/cordova/webview"/>
+    <source-file src="src/android/com/lifang123/cordova/webview/IonicCrosswalkWebView.java" target-dir="src/com/lifang123/cordova/webview"/>
+    <source-file src="src/android/com/lifang123/cordova/webview/CrosswalkWebViewEngine.java" target-dir="src/com/lifang123/cordova/webview"/>
+    <preference name="XWALK_VERSION" default="23+"/>
+    <preference name="XWALK_LITEVERSION" default="xwalk_core_library_canary:17+"/>
+    <preference name="XWALK_COMMANDLINE" default="--disable-pull-to-refresh-effect"/>
+    <preference name="XWALK_MODE" default="embedded"/>
+    <preference name="XWALK_MULTIPLEAPK" default="true"/>
+    <config-file target="res/xml/config.xml" parent="/*"></config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    </config-file>
+    <source-file src="src/android/org/crosswalk/engine/XWalkWebViewEngine.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkFileChooser.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkExposedJsApi.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaResourceClient.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaUiClient.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaView.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaCookieManager.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaClientCertRequest.java" target-dir="src/org/crosswalk/engine"/>
+    <source-file src="src/android/org/crosswalk/engine/XWalkCordovaHttpAuthHandler.java" target-dir="src/org/crosswalk/engine"/>
+    <framework src="src/android/xwalk.gradle" custom="true" type="gradleReference"/>
+    <hook type="after_plugin_install" src="hooks/after_plugin_install/000-shared_mode_special.js"/>
+    <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall/000-shared_mode_special.js"/>
+    <hook type="after_build" src="hooks/after_build/000-build_64_bit.js"/>
+    <hook type="before_build" src="hooks/before_build/000-build_64_bit.js"/>
+  </platform><!-- ios -->
+<platform name="ios">
+    <js-module src="src/www/ios/ios-wkwebview-exec.js" name="ios-wkwebview-exec">
+      <clobbers target="cordova.exec"/>
+    </js-module>
+
+    <config-file target="config.xml" parent="/*">
+        <allow-navigation href="ionic://*"/>
+        <preference name="deployment-target" value="11.0"/>
+        <feature name="IonicWebView">
+            <param name="ios-package" value="CDVWKWebViewEngine"/>
+        </feature>
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
+    </config-file>
+
+    <framework src="WebKit.framework" weak="true"/>
+
+    <header-file src="src/ios/CDVWKWebViewEngine.h"/>
+    <source-file src="src/ios/CDVWKWebViewEngine.m"/>
+    <header-file src="src/ios/CDVWKWebViewUIDelegate.h"/>
+    <source-file src="src/ios/CDVWKWebViewUIDelegate.m"/>
+    <header-file src="src/ios/CDVWKProcessPoolFactory.h"/>
+    <source-file src="src/ios/CDVWKProcessPoolFactory.m"/>
+    <header-file src="src/ios/IONAssetHandler.h"/>
+    <source-file src="src/ios/IONAssetHandler.m"/>
+    <asset src="src/ios/wk-plugin.js" target="wk-plugin.js"/>
+  </platform>
+  <issue>https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview/issues</issue>
+  <author>Ionic Team And Crosswalk Team</author>
+</plugin>
