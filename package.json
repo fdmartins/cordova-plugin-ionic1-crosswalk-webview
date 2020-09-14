@@ -1,5 +1,5 @@
 {
-    "name": "cordova-plugin-ionic4-crosswalk-webview",
+    "name": "cordova-plugin-ionic1-crosswalk-webview",
     "version": "4.1.8",
     "description": "Ionic Crosswalk Web View Engine Plugin",
     "scripts": {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-ionic4-crosswalk-webview" version="4.1.8">
-  <name>cordova-plugin-ionic4-crosswalk-webview</name>
+  <name>cordova-plugin-ionic1-crosswalk-webview</name>
   <description>Ionic Crosswalk Web View Engine Plugin</description>
   <license>Apache-2.0</license>
   <keywords>cordova,wkwebview</keywords>
-  <repo>https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview</repo>
+  <repo>https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview</repo>
   <engines>
     <engine name="cordova" version=">=7.1.0"/>
         <engine name="cordova-ios" version=">=4.0.0-dev"/>
@@ -70,32 +70,31 @@
     <hook type="after_build" src="hooks/after_build/000-build_64_bit.js"/>
     <hook type="before_build" src="hooks/before_build/000-build_64_bit.js"/>
   </platform><!-- ios -->
-<platform name="ios">
-    <js-module src="src/www/ios/ios-wkwebview-exec.js" name="ios-wkwebview-exec">
-      <clobbers target="cordova.exec"/>
-    </js-module>
+    <platform name="ios">
+        <js-module src="src/www/ios/ios-wkwebview-exec.js" name="ios-wkwebview-exec">
+            <clobbers target="cordova.exec" />
+        </js-module>
 
-    <config-file target="config.xml" parent="/*">
-        <allow-navigation href="ionic://*"/>
-        <preference name="deployment-target" value="11.0"/>
-        <feature name="IonicWebView">
-            <param name="ios-package" value="CDVWKWebViewEngine"/>
-        </feature>
-        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
-    </config-file>
+        <js-module src="src/www/ios/ios-wkwebview.js" name="ios-wkwebview">
+            <clobbers target="window.WkWebView" />
+        </js-module>
 
-    <framework src="WebKit.framework" weak="true"/>
+        <config-file target="config.xml" parent="/*">
+            <feature name="CDVWKWebViewEngine">
+                <param name="ios-package" value="CDVWKWebViewEngine" />
+            </feature>
+            <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+        </config-file>
 
-    <header-file src="src/ios/CDVWKWebViewEngine.h"/>
-    <source-file src="src/ios/CDVWKWebViewEngine.m"/>
-    <header-file src="src/ios/CDVWKWebViewUIDelegate.h"/>
-    <source-file src="src/ios/CDVWKWebViewUIDelegate.m"/>
-    <header-file src="src/ios/CDVWKProcessPoolFactory.h"/>
-    <source-file src="src/ios/CDVWKProcessPoolFactory.m"/>
-    <header-file src="src/ios/IONAssetHandler.h"/>
-    <source-file src="src/ios/IONAssetHandler.m"/>
-    <asset src="src/ios/wk-plugin.js" target="wk-plugin.js"/>
-  </platform>
+        <framework src="WebKit.framework" weak="true" />
+
+        <header-file src="src/ios/CDVWKWebViewEngine.h" />
+        <source-file src="src/ios/CDVWKWebViewEngine.m" />
+        <header-file src="src/ios/CDVWKWebViewUIDelegate.h" />
+        <source-file src="src/ios/CDVWKWebViewUIDelegate.m" />
+        <header-file src="src/ios/CDVWKProcessPoolFactory.h" />
+        <source-file src="src/ios/CDVWKProcessPoolFactory.m" />
+    </platform>
   <issue>https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview/issues</issue>
   <author>Ionic Team And Crosswalk Team</author>
 </plugin>
