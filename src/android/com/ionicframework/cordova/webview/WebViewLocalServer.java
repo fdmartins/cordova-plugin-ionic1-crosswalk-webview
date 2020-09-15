@@ -227,7 +227,8 @@ public class WebViewLocalServer {
       Log.d("SERVER", "Handling local request: " + uri.toString());
       return handleLocalRequest(uri, handler, request);
     } else {
-      return handleProxyRequest(uri, handler);
+      //return handleProxyRequest(uri, handler);
+      return null; // fdmartins
     }
   }
 

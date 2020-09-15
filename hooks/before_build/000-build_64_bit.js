@@ -1,11 +1,22 @@
 #!/usr/bin/env node
 
-module.exports = function (context) {
-    var p = new Promise(function (resolve, reject) {
-        var UpdateConfig = require('./../update_config.js');
-        var updateConfig = new UpdateConfig(context);
+module.exports = function(context) {
+
+    /** @external */
+    var deferral = require('q').defer(),
+        UpdateConfig = require('./../update_config.js'),
+        updateConfig = new UpdateConfig(context);
+
+    /** Main method */
+    var main = function() {
+        // Remove the xwalk variables
         updateConfig.beforeBuild64bit();
-        resolve();
-    })
-    return p;
+
+        deferral.resolve();
+    };
+
+    main();
+
+    return deferral.promise;
+
 };

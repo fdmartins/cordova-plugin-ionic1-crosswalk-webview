@@ -117,15 +117,23 @@ public class CrosswalkWebViewEngine extends XWalkWebViewEngine {
             this.parser = parser;
         }
 
+        
         @Override
         public WebResourceResponse shouldInterceptLoadRequest(XWalkView view, String url) {
-            return localServer.shouldInterceptRequest(Uri.parse(url), null);
+            if(url.contains("http://localhost/_app_file_/"))
+            {
+                //Log.d(">>>* ", "_app_file_");
+                return localServer.shouldInterceptRequest(Uri.parse(url), null);
+            }else{
+                //Log.d(">>>* ", "NO_app_file_");
+                return super.shouldInterceptLoadRequest(view, url);
+            }
         }
-
+/*
         @Override
         public void onLoadStarted(XWalkView view, String url) {
             super.onLoadStarted(view, url);
-            /**为了保留加载 file:// 协议 ，以下代码暂时被注释掉*/
+
             // String launchUrl = parser.getLaunchUrl();
             // if (!launchUrl.contains(WebViewLocalServer.httpsScheme) && !launchUrl.contains(WebViewLocalServer.httpScheme) && url.equals(launchUrl)) {
             //     view.stopLoading();
@@ -137,7 +145,7 @@ public class CrosswalkWebViewEngine extends XWalkWebViewEngine {
             //     view.loadUrl(startUrl);
             // }
         }
-
+*/
         @Override
         public void onLoadFinished(XWalkView view, String url) {
             super.onLoadFinished(view, url);
@@ -145,6 +153,7 @@ public class CrosswalkWebViewEngine extends XWalkWebViewEngine {
                     "window.WEBVIEW_SERVER_URL = '" + CDV_LOCAL_SERVER + "';" +
                     "})()");
         }
+        
 
 
     }

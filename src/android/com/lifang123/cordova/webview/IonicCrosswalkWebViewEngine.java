@@ -37,7 +37,7 @@ import org.apache.cordova.engine.SystemWebView;
 
 public class IonicCrosswalkWebViewEngine implements CordovaWebViewEngine {
 
-    public static final String TAG = "IonicWebViewEngine";
+    public static final String TAG = ">>>IonicWebViewEngine";
 
     public IonicWebViewEngine ionicWebViewEngine;
     public CrosswalkWebViewEngine crosswalkWebViewEngine;
@@ -77,8 +77,10 @@ public class IonicCrosswalkWebViewEngine implements CordovaWebViewEngine {
 
 
         if (isUseCrosswalkWebView) {
+            Log.d(TAG, "CrosswalkWebViewEngine");
             crosswalkWebViewEngine = new CrosswalkWebViewEngine(context, preferences);
         } else {
+            Log.d(TAG, "IonicWebViewEngine");
             ionicWebViewEngine = new IonicWebViewEngine(context, preferences);
         }
 

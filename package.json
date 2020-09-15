@@ -9,10 +9,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview"
+        "url": "https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview"
     },
     "bugs": {
-        "url": "https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview/issues"
+        "url": "https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview/issues"
     },
     "keywords": [
         "cordova",

@@ -119,6 +119,7 @@ public class IonicWebViewEngine extends SystemWebViewEngine {
       this.parser = parser;
     }
 
+    /*
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
@@ -129,7 +130,19 @@ public class IonicWebViewEngine extends SystemWebViewEngine {
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
       return localServer.shouldInterceptRequest(Uri.parse(url), null);
-    }
+    }*/
+    
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+      WebResourceResponse r = localServer.shouldInterceptRequest(request.getUrl(), request);
+
+      if (r==null) // fdmartins
+      {
+           return super.shouldInterceptRequest(view, request);
+      }
+      
+      return r;
+    }    
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {

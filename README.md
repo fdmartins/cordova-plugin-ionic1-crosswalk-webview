@@ -18,9 +18,11 @@
 使用前需卸载`cordova-plugin-ionic-webview`与`cordova-plugin-crosswalk-webview`
 
 ``` shell
-cordova plugin remove cordova-plugin-crosswalk-webview
-cordova plugin remove cordova-plugin-ionic-webview
+ionic cordova plugin remove cordova-plugin-crosswalk-webview
+ionic cordova plugin remove cordova-plugin-ionic-webview
 ```
+
+
 
 #### 安装插件
 
@@ -28,22 +30,24 @@ cordova plugin remove cordova-plugin-ionic-webview
 **`android sdk 24 以下`，使用`crosswalk webview`浏览器内核;
 `android sdk 24及以上`，使用安卓系统内置的高版本浏览器内核。**
 ``` shell
-cordova plugin add cordova-plugin-ionic4-crosswalk-webview --variable WEBVIEW_ENGINE=AUTO
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=AUTO
 ```
 ---
 
 **始终使用CrosswalkWebView内核**
 
 ``` shell
-cordova plugin add cordova-plugin-ionic4-crosswalk-webview --variable WEBVIEW_ENGINE=CROSSWALK
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=CROSSWALK
 ```
 
 ---
 
 **始终使用SystemWebView内核**
 ``` shell
-cordova plugin add cordova-plugin-ionic4-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
 ```
+
+ionic cordova plugin add cordova-plugin-crypto-file
 
 
 ## 如何使用
@@ -59,6 +63,37 @@ cordova plugin add cordova-plugin-ionic4-crosswalk-webview --variable WEBVIEW_EN
     }
   </script>
 </head>
+```
+
+To use with file://storage, like picture from camera and album, use this function.
+
+``` js
+
+imageSrc = imageFromCameraOrAlbum 
+if (ionic.Platform.isIOS()==false)
+{   
+    imageSrc = window.Ionic.WebView.convertFileSrc(imageFromCameraOrAlbum);
+}
+
+<img src='{{imgSrc}}'>
+```
+
+include in your config.xml:
+``` html
+<platform name="android">
+  <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+      <application android:usesCleartextTraffic="true" />
+  </edit-config>
+</platform>
+```
+
+if you have not defined the android XML namespace previously, you will receive an error: unbound prefix during build. This indicates that you need to add it to your widget tag in the same config.xml, like so:
+
+``` html
+<widget id="you-app-id" version="1.2.3"
+xmlns="http://www.w3.org/ns/widgets" 
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:cdv="http://cordova.apache.org/ns/1.0">
 ```
 
 #### 切换内核
@@ -104,7 +139,9 @@ ng run app:ionic-cordova-build --platform=android && cordova run android --emula
 npm run debug
 ```
 
-## Demo
+## To remove plugin:
 
-你可以参考示例
-`https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-demo`
+``` shell
+ionic cordova plugin rm cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
+```
+

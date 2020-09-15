@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-ionic4-crosswalk-webview" version="4.1.8">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-ionic1-crosswalk-webview" version="4.1.8">
   <name>cordova-plugin-ionic1-crosswalk-webview</name>
   <description>Ionic Crosswalk Web View Engine Plugin</description>
   <license>Apache-2.0</license>
@@ -95,6 +95,6 @@
         <header-file src="src/ios/CDVWKProcessPoolFactory.h" />
         <source-file src="src/ios/CDVWKProcessPoolFactory.m" />
     </platform>
-  <issue>https://github.com/waitaction/cordova-plugin-ionic4-crosswalk-webview/issues</issue>
+  <issue>https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview/issues</issue>
   <author>Ionic Team And Crosswalk Team</author>
 </plugin>
