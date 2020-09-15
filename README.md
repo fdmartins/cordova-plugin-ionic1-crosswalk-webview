@@ -34,21 +34,10 @@ ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-cros
 ```
 ---
 
-**始终使用CrosswalkWebView内核**
 
 ``` shell
-ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=CROSSWALK
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-crypto-file
 ```
-
----
-
-**始终使用SystemWebView内核**
-``` shell
-ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
-```
-
-ionic cordova plugin add cordova-plugin-crypto-file
-
 
 ## 如何使用
 
@@ -143,5 +132,18 @@ npm run debug
 
 ``` shell
 ionic cordova plugin rm cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
+```
+
+
+## to force one type of webview engine: 
+
+``` shell
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=CROSSWALK
+```
+
+---
+
+``` shell
+ionic cordova plugin add https://github.com/fdmartins/cordova-plugin-ionic1-crosswalk-webview --variable WEBVIEW_ENGINE=SYSTEM
 ```
 
